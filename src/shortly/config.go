@@ -4,21 +4,21 @@ import (
 	"bufio"
 	"code.google.com/p/gcfg"
 	"fmt"
-    "os"
+	"os"
 )
 
 type Config struct {
 	Server struct {
 		Host string
-        Bind string
+		Bind string
 		Port int
 	}
 	Database struct {
 		Url string
 	}
-    Templates struct {
-        Path string
-    }
+	Templates struct {
+		Path string
+	}
 }
 
 var configuration Config

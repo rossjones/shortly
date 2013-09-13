@@ -18,24 +18,26 @@ func usage() {
 func main() {
 
 	if len(flag.Args()) == 0 {
-        // Bail
+        usage()
     }
 
-	if len(flag.Args()) == 2 && flag.Arg(0) == "make-config" {
-		err := WriteSampleConfig(flag.Arg(1))
+    var command = flag.Arg(0)
+    var arg = ''
+
+    if len(flag.Args()) == 2 {
+        arg = flag.Arg(1)
+    }
+
+	if command == "make-config" {
+		err := WriteSampleConfig(arg)
 		if err != nil {
 			panic(err)
 		}
         return
-	} else if flag.Arg(0) == "serve" {
-        if len(flag.Args()) == 2 {
-            err := loadConfig("sample.cfg")
-            if err != nil {
-                panic(err)
-            }
-        } else {
-            fmt.Println("Please specify the name of the config file")
-            usage()
+	} else command == "serve" {
+        err := loadConfig(arg)
+        if err != nil {
+            panic(err)
         }
     } else {
         usage()
