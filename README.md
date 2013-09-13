@@ -3,7 +3,19 @@
 
 ## Getting started
 
+### Command line arguments
 
+#### make-config
+
+    shortly make-config /etc/shortly.cfg
+
+#### default-templates
+
+    shortly get-templates /opt/shortly
+    
+#### serve
+
+    shortly serve /etc/shortly.cfg
 
 ## Templates
 
@@ -21,8 +33,6 @@ You should make a note of the path to the templates, you'll need it in the confi
 If you don't like the default templates, and want to provide your own, you can just fork the [shortly-templates](git@github.com:rossjones/shortly-templates.git) project and make your own modifications to the CSS, HTML or JS.
 
 ## Configuration
-
-Run
 
     shortly make-config <filename>
 
