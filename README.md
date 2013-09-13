@@ -3,11 +3,24 @@
 
 ## Getting started
 
+### Command line arguments
 
+#### make-config
+
+    shortly make-config /etc/shortly.cfg
+
+#### default-templates
+
+    shortly get-templates /opt/shortly
+    
+#### serve
+
+    shortly serve /etc/shortly.cfg
 
 ## Templates
 
-So that *shortly* has something to use for templates, HTML, CSS etc, you need to tell *shortly* where the templates are stored. We do this first as we need to tell *shortly* where they are in the next stage (configuration).
+The templates in *shortly* are not built-in. To have the system work you need to obtain some HTML, CSS etc, and install them on your system.
+We do this first as we will need the location of the templates for the configuration.
 
 The easiest way to do this to get started is to create a folder somewhere, say /opt/shortly like follows.
 
@@ -15,12 +28,11 @@ The easiest way to do this to get started is to create a folder somewhere, say /
     cd /opt/shortly
     git clone git@github.com:rossjones/shortly-templates.git
     
-You should make a note of the path to the templates, you'll need it in the configuration step later.  In this case it is /opt/shortly/shortly-templates    
+You should make a note of the path to the templates, you'll need it in the configuration step later.  In this case it is `/opt/shortly/shortly-templates`   
     
+If you don't like the default templates, and want to provide your own, you can just fork the [shortly-templates](git@github.com:rossjones/shortly-templates.git) project and make your own modifications to the CSS, HTML or JS.
 
 ## Configuration
-
-Run
 
     shortly make-config <filename>
 
