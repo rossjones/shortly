@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
-    "html/template"
+    "github.com/flosch/pongo"
 	"net/http"
 	"path"
 )
 
-var template_root string
-var templates *template.Template
+var templates = make(map[string]*pongo.Template)
+var tpl_root string
 
 func root_handler(w http.ResponseWriter, r *http.Request) {
-    renderTemplate(w, "index.html", map[string]interface{}{"Title": "Test"})
+    renderTemplate("index.html", pongo.Context{"Title": "test"}, w)
 }
 
 func api_handler(w http.ResponseWriter, r *http.Request) {
@@ -22,28 +22,28 @@ func app_handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hi there, I love APP")
 }
 
-func renderTemplate(w http.ResponseWriter, tmpl string, ctx map[string]interface{}) {
+func renderTemplate(tmpl string, ctx pongo.Context, w http.ResponseWriter) {
     // When in debug, we will load the templates each time so we can modify them
     // without restarting
     if configuration.App.Debug {
-        t, _ := template.ParseFiles(path.Join(template_root,tmpl ))
-        t.Execute(w, ctx)
+        t, err := pongo.FromFile(path.Join(tpl_root, tmpl), nil)
+        err = t.ExecuteRW(w, &ctx)
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+        }
         return
     }
 
-    err := templates.ExecuteTemplate(w, tmpl, ctx)
+    err := templates[tmpl].ExecuteRW(w, &ctx)
     if err != nil {
-        // Log the problem
-        http.Error(w, err.Error(), http.StatusInternalServerError)
+            http.Error(w, err.Error(), http.StatusInternalServerError)
     }
 }
 
 func run_server() error {
-    template_root = path.Join(configuration.Templates.Path, "templates/")
-    if ! configuration.App.Debug {
-        templates = template.Must(template.ParseFiles(path.Join(template_root, "base.html"),
-                                                      path.Join(template_root, "index.html")))
-    }
+    tpl_root = path.Join(configuration.Templates.Path, "templates/")
+    templates["index.html"] = pongo.Must(pongo.FromFile(path.Join(tpl_root, "index.html"), nil))
+
 
     svr := fmt.Sprintf("%s:%d", configuration.Server.Host, configuration.Server.Port)
 	fmt.Printf("Shortly is listening on %s\n", svr)

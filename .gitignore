@@ -9,6 +9,7 @@ _test
 bin
 pkg
 src/code.google.com
+src/github.com
 
 # Architecture specific extensions/prefixes
 *.[568vq]
