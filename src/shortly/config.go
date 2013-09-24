@@ -8,6 +8,9 @@ import (
 )
 
 type Config struct {
+	App struct {
+		Debug bool
+	}
 	Server struct {
 		Host string
 		Bind string
@@ -42,6 +45,9 @@ func WriteSampleConfig(filename string) error {
 var SAMPLE_CONFIG = `
 # This is a sample config file for shortly.  You will need
 # to change nearly all of the values to get a workable system.
+
+[app]
+debug = false
 
 [server]
 host = localhost  # The hostname that we are serving at
