@@ -45,7 +45,7 @@ func run_server() error {
     templates["index.html"] = pongo.Must(pongo.FromFile(path.Join(tpl_root, "index.html"), nil))
 
 
-    svr := fmt.Sprintf("%s:%d", configuration.Server.Host, configuration.Server.Port)
+    svr := fmt.Sprintf("%s:%d", configuration.Server.Bind, configuration.Server.Port)
 	fmt.Printf("Shortly is listening on %s\n", svr)
 
 	http.HandleFunc("/", root_handler)

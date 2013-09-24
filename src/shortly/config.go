@@ -51,6 +51,7 @@ debug = false
 
 [server]
 host = localhost  # The hostname that we are serving at
+bind = 0.0.0.0	  # The IP address to listen on, default is all interfaces
 port = 2112       # The port to serve content on
 
 [database]
