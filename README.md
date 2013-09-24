@@ -12,7 +12,7 @@
 #### default-templates
 
     shortly get-templates /opt/shortly
-    
+
 #### serve
 
     shortly serve /etc/shortly.cfg
@@ -27,9 +27,9 @@ The easiest way to do this to get started is to create a folder somewhere, say /
     mkdir -p /opt/shortly
     cd /opt/shortly
     git clone git@github.com:rossjones/shortly-templates.git
-    
-You should make a note of the path to the templates, you'll need it in the configuration step later.  In this case it is `/opt/shortly/shortly-templates`   
-    
+
+You should make a note of the path to the templates, you'll need it in the configuration step later.  In this case it is `/opt/shortly/shortly-templates`
+
 If you don't like the default templates, and want to provide your own, you can just fork the [shortly-templates](git@github.com:rossjones/shortly-templates.git) project and make your own modifications to the CSS, HTML or JS.
 
 ## Configuration
@@ -41,6 +41,7 @@ If you don't like the default templates, and want to provide your own, you can j
 
 |Section|Key|Value|
 |----|----|----|
+|app|debug|Set to true to auto-reload templates, false for production|
 |server|hostname|The hostname for the server serving the data|
 ||bind|The address to bind to, could be 0.0.0.0|
 ||port|The port to serve the data on|
