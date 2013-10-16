@@ -41,9 +41,9 @@ func main() {
 			panic(err)
 		}
 
-        if configuration.App.Debug {
-            fmt.Printf("DEBUG is on\n")
-        }
+		if configuration.App.Debug {
+			fmt.Printf("DEBUG is on\n")
+		}
 
 		err = run_server()
 		if err != nil {
