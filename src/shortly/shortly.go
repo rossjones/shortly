@@ -35,22 +35,29 @@ func main() {
 			panic(err)
 		}
 		return
-	} else if command == "serve" {
+	} else {
 		err := loadConfig(arg)
 		if err != nil {
 			panic(err)
 		}
 
-		if configuration.App.Debug {
-			fmt.Printf("DEBUG is on\n")
+		if command == "create-database" {
+			err := create_database()
+			if err != nil {
+				panic(err)
+			}
+		} else if command == "serve" {
+			if configuration.App.Debug {
+				fmt.Printf("DEBUG is on\n")
+			}
+
+			err = run_server()
+			if err != nil {
+				panic(err)
+			}
+		} else {
+			usage()
 		}
 
-		err = run_server()
-		if err != nil {
-			panic(err)
-		}
-
-	} else {
-		usage()
 	}
 }

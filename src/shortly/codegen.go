@@ -6,9 +6,9 @@ import "strings"
 var encoding_chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 func base62_encode(number uint64) string {
-	result := bytes.NewBufferString("")
+	result := bytes.NewBufferString("         ")
 
-	for ;number >= 62; {
+	for number >= 62 {
 		r := number % 62
 		result.WriteString(string(encoding_chars[r]))
 		number = number / 62
